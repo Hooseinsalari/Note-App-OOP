@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="notes">
+        <div class="notes__sidebar">
+            <div class="notes__logo">
+                <h2>Note App</h2>
+            </div>
+
+            <div class="notes__list">
+                <div class="notes__item">
+                    <div class="notes__title">New note</div>
+                    <div class="notes__body">javascript course</div>
+                    <div class="notes__date">Monday 12:30 PM</div>
+                </div>
+
+                <div class="notes__item notes__item-selected">
+                    <div class="notes__title">New note</div>
+                    <div class="notes__body">javascript course</div>
+                    <div class="notes__date">Monday 12:30 PM</div>
+                </div>
+
+                <div class="notes__item">
+                    <div class="notes__title">New note</div>
+                    <div class="notes__body">javascript course</div>
+                    <div class="notes__date">Monday 12:30 PM</div>
+                </div>
+                <div class="notes__item">
+                    <div class="notes__title">New note</div>
+                    <div class="notes__body">javascript course</div>
+                    <div class="notes__date">Monday 12:30 PM</div>
+                </div>
+            </div>
+
+            <button class="notes__add">Add Note</button>
+        </div>
+
+        <form class="note__preview">
+            <input class="note__input" type="text" placeholder="add subject ...">
+            <textarea class="note__textarea" name="content" id="content" placeholder="add description"></textarea>
+        </form>
+    </div>
+</body>
+</html>

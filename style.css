@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', sans-serif;
+}
+
+body {
+    background-color: #f3f4f6;
+}
+
+.notes {
+    display: flex;
+}
+
+.notes__sidebar {
+    background-color: #0f172a;
+    width: 25%;
+    height: 100vh;
+    padding: 0.5rem 1.5rem;
+    border-top-left-radius: 85px;
+    display: flex;
+    flex-direction: column;
+}
+
+.notes__logo {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.notes__logo::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    margin: 1rem auto 0;
+    display: block;
+}
+
+.notes__list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.notes__list::-webkit-scrollbar {
+    display: none;
+}
+
+.notes__item {
+    background-color: transparent;
+    color: #6b7280;
+    padding: 0.8rem;
+    border-radius: 10px;
+    margin: 1rem auto;
+    cursor: pointer;
+}
+
+.notes__item::after {
+    content: '';
+    width: 100%;
+    border-bottom: 1px solid #6b7280;
+    display: block;
+    margin: 1rem auto 0;
+}
+
+.notes__item-selected {
+    background-color: #e5e7eb;
+    color: #1f2937;
+    padding: 0.8rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.notes__item-selected::after {
+    content: '';
+    display: none;
+}
+
+.notes__title {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.notes__body {
+    margin: 1rem auto;
+    font-weight: 500;
+}
+
+.notes__date {
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: left;
+}
+
+.notes__add {
+    background: #1bb152;
+    padding: 0.5rem;
+    margin: 1rem 0 0.5rem;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.notes__add:hover {
+    background: #16a34a;
+}
+
+/* ===== */
+
+.note__preview {
+    padding: 0 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.note__input {
+    background-color: #fff;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 1rem 0.5rem;
+    border-radius: 10px;
+    font-size: 1.4rem;
+}
+
+.note__textarea {
+    background-color: #fff;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    margin: 1.5rem auto;
+    resize: none;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    width: 100%;
+    flex-grow: 1;
+}
+
+
