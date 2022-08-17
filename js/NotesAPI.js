@@ -21,7 +21,7 @@ const notes = [
 
 export default class NotesAPI {
   static getAllNotes() {
-    const savedNotes = JSON.parse(localStorage.getItem("notes-app")) || [];
+    const savedNotes = notes || [];
     return savedNotes.sort((a, b) => {
       return new Date(a.date) > new Date(b.date) ? -1 : 1;
     });
@@ -48,3 +48,4 @@ export default class NotesAPI {
     localStorage.setItem("notes-app", JSON.stringify(filteredNotes));
   }
 }
+

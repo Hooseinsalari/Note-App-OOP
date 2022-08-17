@@ -10,4 +10,9 @@ const view = new NotesView(root, {
   onEditNotes(inputValue, textareaValue) {
     console.log(inputValue, textareaValue);
   },
+  onSelectedNote(note) {
+    console.log(note);
+  }
 });
+
+view.updateNoteList(NotesAPI.getAllNotes())

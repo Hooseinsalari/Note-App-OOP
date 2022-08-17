@@ -1,9 +1,10 @@
 export default class NotesView {
   constructor(root, handlers) {
     this.root = root;
-    const { onNoteAdd, onEditNotes } = handlers;
+    const { onNoteAdd, onEditNotes, onSelectedNote } = handlers;
     this.onNoteAdd = onNoteAdd;
     this.onEditNotes = onEditNotes;
+    this.onSelectedNote = onSelectedNote
 
     this.root.innerHTML = `
         <div class="notes__sidebar">
@@ -29,10 +30,48 @@ export default class NotesView {
 
     [noteInput, noteTextarea].forEach((e) => {
       e.addEventListener("blur", () => {
-        const inputValue = noteInput.value.trim()
-        const textareaValue = noteTextarea.value.trim()
+        const inputValue = noteInput.value.trim();
+        const textareaValue = noteTextarea.value.trim();
 
-        this.onEditNotes(inputValue, textareaValue)
+        this.onEditNotes(inputValue, textareaValue);
+      });
+    });
+  }
+
+  #createListItemHTML(id, title, body, date) {
+    const MAX_BODY_LENGTH = 50;
+
+    return `
+    <div class="notes__item" data-note-id="${id}">
+        <div class="notes__title">${title}</div>
+        <div class="notes__body">
+            ${body.substring(0, MAX_BODY_LENGTH)}
+            ${body.length > MAX_BODY_LENGTH ? "..." : ""}
+        </div>
+        <div class="notes__date">
+        ${new Date(date).toLocaleString("en", {
+          dateStyle: "full",
+          timeStyle: "short",
+        })}
+        </div>
+    </div>
+    `;
+  }
+
+  updateNoteList(notes) {
+    const notesListConteiner = this.root.querySelector(".notes__list");
+
+    notesListConteiner.innerHTML = "";
+    let notesList = "";
+    for (let note of notes) {
+      const { id, title, body, date } = note;
+      const htmlContent = this.#createListItemHTML(id, title, body, date);
+      notesList += htmlContent;
+    }
+    notesListConteiner.innerHTML = notesList;
+    notesListConteiner.querySelectorAll(".notes__item").forEach((noteItem) => {
+      noteItem.addEventListener("click", () => {
+        this.onSelectedNote(noteItem.dataset.noteId);
       });
     });
   }
