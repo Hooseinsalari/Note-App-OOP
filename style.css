@@ -50,7 +50,7 @@ body {
     display: none;
 }
 
-.notes__item {
+.note__item {
     background-color: transparent;
     color: #6b7280;
     padding: 0.8rem;
@@ -59,7 +59,7 @@ body {
     cursor: pointer;
 }
 
-.notes__item::after {
+.note__item::after {
     content: '';
     width: 100%;
     border-bottom: 1px solid #6b7280;
@@ -67,7 +67,7 @@ body {
     margin: 1rem auto 0;
 }
 
-.notes__item-selected {
+.note__item-selected {
     background-color: #e5e7eb;
     color: #1f2937;
     padding: 0.8rem;
@@ -75,22 +75,45 @@ body {
     margin-top: 1rem;
 }
 
-.notes__item-selected::after {
+.note__item-selected::after {
     content: '';
     display: none;
 }
 
-.notes__title {
+.note__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note__title {
     font-size: 1.2rem;
     font-weight: 700;
 }
 
-.notes__body {
+.note__trash {
+    font-size: 1.4rem;
+    color: rgba(220, 0, 0, 0.773);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.note__trash:hover {
+    color: rgba(220, 0, 0, 1);
+}
+
+.note__body {
     margin: 1rem auto;
     font-weight: 500;
 }
 
-.notes__date {
+.note__date {
     font-size: 0.8rem;
     font-weight: 400;
     text-align: left;

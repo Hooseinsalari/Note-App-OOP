@@ -1,10 +1,11 @@
 export default class NotesView {
   constructor(root, handlers) {
     this.root = root;
-    const { onNoteAdd, onEditNotes, onSelectedNote } = handlers;
+    const { onNoteAdd, onEditNotes, onSelectedNote, onDeleteNote } = handlers;
     this.onNoteAdd = onNoteAdd;
     this.onEditNotes = onEditNotes;
-    this.onSelectedNote = onSelectedNote
+    this.onSelectedNote = onSelectedNote;
+    this.onDeleteNote = onDeleteNote;
 
     this.root.innerHTML = `
         <div class="notes__sidebar">
@@ -36,19 +37,24 @@ export default class NotesView {
         this.onEditNotes(inputValue, textareaValue);
       });
     });
+
+    this.updateNotePreviewVisibility(false)
   }
 
   #createListItemHTML(id, title, body, date) {
     const MAX_BODY_LENGTH = 50;
 
     return `
-    <div class="notes__item" data-note-id="${id}">
-        <div class="notes__title">${title}</div>
-        <div class="notes__body">
+    <div class="note__item" id="item" data-note-id="${id}">
+        <div class="note__header">
+          <div class="note__title">${title}</div>
+          <span class="note__trash" data-note-id="${id}"><i class="icon-trash"></i></span>
+        </div>
+        <div class="note__body">
             ${body.substring(0, MAX_BODY_LENGTH)}
             ${body.length > MAX_BODY_LENGTH ? "..." : ""}
         </div>
-        <div class="notes__date">
+        <div class="note__date">
         ${new Date(date).toLocaleString("en", {
           dateStyle: "full",
           timeStyle: "short",
@@ -68,11 +74,35 @@ export default class NotesView {
       const htmlContent = this.#createListItemHTML(id, title, body, date);
       notesList += htmlContent;
     }
+
     notesListConteiner.innerHTML = notesList;
-    notesListConteiner.querySelectorAll(".notes__item").forEach((noteItem) => {
-      noteItem.addEventListener("click", () => {
+
+    notesListConteiner.querySelectorAll(".note__item").forEach((noteItem) => {
+      noteItem.addEventListener("click", (e) => {
         this.onSelectedNote(noteItem.dataset.noteId);
       });
     });
+
+    notesListConteiner.querySelectorAll(".note__trash").forEach((noteItem) => {
+      noteItem.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.onDeleteNote(noteItem.dataset.noteId);
+      });
+    });
+  }
+
+  updateActiveNote(note) {
+    this.root.querySelector(".note__input").value = note.title;
+    this.root.querySelector(".note__textarea").value = note.body;
+
+    this.root.querySelectorAll("#item").forEach((n) => {
+      n.classList.remove("note__item-selected");
+    });
+
+    this.root.querySelector(`#item`).classList.add('note__item-selected')
+  }
+
+  updateNotePreviewVisibility(visible) {
+    this.root.querySelector('.note__preview').style.visibility = visible ? 'visible' : 'hidden'
   }
 }
